@@ -2,35 +2,37 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
+
   "projects": {
-    "angular-di-articles": {
+    "03-angular-di": {
       "projectType": "application",
+      "root": "projects/03-angular-di",
+      "sourceRoot": "projects/03-angular-di/src",
+      "prefix": "app",
+
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "changeDetection": "OnPush"
         }
       },
-      "root": "",
-      "sourceRoot": "src",
-      "prefix": "app",
+
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/angular-di-articles",
-            "index": "src/index.html",
-            "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
-            "tsConfig": "tsconfig.app.json",
+            "outputPath": "dist/03-angular-di",
+            "index": "projects/03-angular-di/src/index.html",
+            "browser": "projects/03-angular-di/src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "projects/03-angular-di/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "projects/03-angular-di/src/favicon.ico",
+              "projects/03-angular-di/src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "projects/03-angular-di/src/styles.scss"
             ],
             "scripts": []
           },
@@ -48,7 +50,10 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "optimization": true,
+              "extractLicenses": true,
+              "sourceMap": false
             },
             "development": {
               "optimization": false,
@@ -56,46 +61,50 @@
               "sourceMap": true
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "development"
         },
+
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angular-di-articles:build:production"
+              "buildTarget": "03-angular-di:build:production"
             },
             "development": {
-              "buildTarget": "angular-di-articles:build:development"
+              "buildTarget": "03-angular-di:build:development"
             }
           },
           "defaultConfiguration": "development"
         },
+
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "angular-di-articles:build"
+            "buildTarget": "03-angular-di:build"
           }
         },
+
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              "projects/03-angular-di/src/favicon.ico",
+              "projects/03-angular-di/src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "projects/03-angular-di/src/styles.scss"
             ],
             "scripts": []
           }
         }
       }
     }
+  },
+
+  "cli": {
+    "analytics": false
   }
 }
